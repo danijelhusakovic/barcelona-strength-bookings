@@ -23,7 +23,7 @@ Track overall progress.
 
 | Phase | Topic | Done |
 |-------|--------|------|
-| [ ] **A** | Audit: find and classify all tool/vendor strings | |
+| [x] **A** | Audit: find and classify all tool/vendor strings | ✅ 2026-05-18 |
 | [ ] **B** | Remove/replace **user-visible** Lovable meta & copy | |
 | [ ] **C** | Head architecture: single strategy for root + routes | |
 | [ ] **D** | Core HTML meta (title, description, lang, canonical, robots) | |
@@ -37,29 +37,44 @@ Track overall progress.
 
 ## Phase A — Audit (find everything)
 
-Run searches (repo root, excluding `node_modules` for manual reading; lockfile noted separately).
+Audit completed 2026-05-18. Results recorded below.
 
 ### A.1 Strings to find
 
-- [ ] `Lovable`, `lovable`, `@lovable`
-- [ ] `bolt`, `Bolt`, `bolt.new`
-- [ ] `tanstack_start_ts` (generic `package.json` name — optional rename for clarity, not a “tool leak”)
-- [ ] Placeholder titles: `Lovable App`, `Generated Project`
+- [x] `Lovable`, `lovable`, `@lovable` — see A.2 table below
+- [x] `bolt`, `Bolt`, `bolt.new` — **zero hits** outside plan doc ✅
+- [x] `tanstack_start_ts` — present in `package.json` + lock files (cosmetic, not HTML-visible)
+- [x] Placeholder titles: `Lovable App`, `Generated Project` — **zero hits** in any source file ✅
 
-### A.2 Known locations (as of plan authoring)
+### A.2 Audit findings (actual state)
 
-| Location | What appears | Action in later phases |
-|----------|----------------|-------------------------|
-| [`src/routes/__root.tsx`](src/routes/__root.tsx) `head().meta` | `title`, `description`, `author`, `og:*`, `twitter:card`, `twitter:site` — all Lovable defaults | **Replace** with neutral defaults or strip duplicates (see §4). |
-| [`src/routes/index.tsx`](src/routes/index.tsx) `head().meta` | Alex Moreno title, description, `og:title`, `og:description`, `og:image` (Unsplash), `og:type` | **Extend** with full OG/Twitter; align image with brand (see §6). |
-| [`vite.config.ts`](vite.config.ts) | Comment + `import` from `@lovable.dev/vite-tanstack-config` | **Comment only**: rewrite to neutral wording (“bundled TanStack config”). **Do not** remove the npm package import unless migrating the whole build (out of scope for “metadata” unless you accept a large refactor). |
-| [`package.json`](package.json) | `devDependency` `@lovable.dev/vite-tanstack-config` | **Keep** unless replacing the Vite config stack. Package name is not exposed in HTML. |
-| [`package-lock.json`](package-lock.json) | Lock entries for `@lovable.dev/*`, `lovable-tagger` | **Auto-updated** by npm; no hand-editing. Not user-visible. |
+| Location | Strings found | Severity | Action in later phases |
+|----------|---------------|----------|------------------------|
+| `src/routes/__root.tsx` | **None** — already cleaned; title is `"Barcelona Strength Bookings"`, charset, viewport, theme-color | ✅ Clean | Confirm child routes own marketing meta (Phase C). |
+| `src/routes/index.tsx` | No Lovable strings; partial OG (`og:title`, `og:description`, Unsplash `og:image`) | ⚠️ Incomplete | Extend with full OG/Twitter, canonical, brand image (Phases D–F). |
+| `vite.config.ts` line 1 | `// @lovable.dev/vite-tanstack-config already includes…` | ❌ Dev-visible comment | Phase B.2: reword to neutral. |
+| `vite.config.ts` line 7 | `import { defineConfig } from "@lovable.dev/vite-tanstack-config"` | ℹ️ Build dep only | Keep — not exposed in rendered HTML. |
+| `package.json` | `"name": "tanstack_start_ts"`; devDep `@lovable.dev/vite-tanstack-config` | ⚠️ Optional | Phase B.3: rename `name` field. Dep not HTML-visible. |
+| `bunfig.toml` | `minimumReleaseAgeExcludes = ["@lovable.dev/vite-tanstack-config"]` | ℹ️ Dev-only | Not user-visible; leave unless removing dep entirely. |
+| `bun.lock` / `package-lock.json` | `@lovable.dev/*` and `lovable-tagger` lock entries | ℹ️ Auto-generated | No hand-editing; auto-updated by package manager. |
+| `src/**/*.tsx` (all files) | **Zero matches** for `lovable`, `bolt`, `Lovable App`, `Generated Project` | ✅ Clean | No action needed. |
+| `public/` | No scaffold strings in static assets | ✅ Clean | No action needed. |
 
 ### A.3 Important distinction (avoid false expectations)
 
 - **Removing “all references to Lovable” in dependencies** = replacing `@lovable.dev/vite-tanstack-config` with a hand-rolled or official TanStack+Vite config. That is a **large build refactor**, not a metadata task. This plan treats it as **optional follow-up** (§12).
-- **Removing Lovable from what users and bots see** = **required** for this initiative: primarily **`__root.tsx` `<head>`** and any stray copy in routes or static files.
+- **Removing Lovable from what users and bots see** = **required** for this initiative. As of audit: the only remaining non-lockfile reference is the **`vite.config.ts` comment** on line 1. `__root.tsx` is already clean.
+
+### A.4 Verdict
+
+| Concern | Result |
+|---------|--------|
+| Lovable strings in rendered `<head>` | ✅ None — `__root.tsx` already cleaned |
+| Lovable strings in `src/` UI code | ✅ None |
+| Bolt strings anywhere in source | ✅ None |
+| Placeholder titles in source | ✅ None |
+| Remaining Lovable ref (non-HTML) | ❌ `vite.config.ts` comment line 1 — fix in Phase B.2 |
+| Generic `package.json` name | ⚠️ Optional rename in Phase B.3 |
 
 ---
 
