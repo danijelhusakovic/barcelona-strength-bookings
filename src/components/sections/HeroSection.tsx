@@ -57,6 +57,7 @@ export function HeroSection() {
               loading="eager"
               width={1200}
               height={1500}
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />

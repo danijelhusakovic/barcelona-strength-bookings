@@ -46,6 +46,7 @@ export function CoachSection() {
               loading="lazy"
               width={1000}
               height={1250}
+              sizes="(min-width: 1024px) 42vw, 100vw"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
@@ -86,6 +87,7 @@ export function CoachSection() {
                 loading="lazy"
                 width={900}
                 height={900}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 50vw"
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>

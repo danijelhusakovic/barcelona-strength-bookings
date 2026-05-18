@@ -21,7 +21,7 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 
 | Phase | Focus | Status |
 |-------|--------|--------|
-| [ ] **0** | Foundations (fonts, tokens, skip link, scroll-margin) | |
+| [x] **0** | Foundations (fonts, tokens, skip link, scroll-margin) | |
 | [ ] **1** | Navigation (mobile menu, scroll-spy, sticky bar) | |
 | [ ] **2** | Booking UX (sheet, toasts, CTAs, waitlist UI) | |
 | [ ] **3** | Schedule (mobile layout, split filters, next-available) | |
@@ -40,31 +40,31 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 
 ### 0.1 Font loading
 
-- [ ] Remove Google Fonts `@import` from `src/styles.css` (fixes PostCSS “@import must precede” warning)
-- [ ] Add `preconnect` to `fonts.googleapis.com` and `fonts.gstatic.com` in `__root.tsx`
-- [ ] Add `<link>` stylesheets for Inter + Space Grotesk in document `<head>`
-- [ ] Verify fonts still apply via `--font-sans` / `--font-display` in `@theme`
+- [x] Remove Google Fonts `@import` from `src/styles.css` (fixes PostCSS “@import must precede” warning)
+- [x] Add `preconnect` to `fonts.googleapis.com` and `fonts.gstatic.com` in `__root.tsx`
+- [x] Add `<link>` stylesheets for Inter + Space Grotesk in document `<head>`
+- [x] Verify fonts still apply via `--font-sans` / `--font-display` in `@theme`
 - [ ] Confirm no layout shift regression on first paint (manual check in devtools)
 
 ### 0.2 Skip link & main landmark
 
-- [ ] Add “Skip to main content” as first focusable element in `index.tsx` (or `__root.tsx` body)
-- [ ] Ensure `<main>` has `id="main-content"` (or matching target)
-- [ ] Style skip link: visually hidden until `:focus-visible`
+- [x] Add “Skip to main content” as first focusable element in `index.tsx` (or `__root.tsx` body)
+- [x] Ensure `<main>` has `id="main-content"` (or matching target)
+- [x] Style skip link: visually hidden until `:focus-visible`
 
 ### 0.3 Scroll margin for hash targets
 
-- [ ] Add `scroll-margin-top` (≥ `4rem` / nav height) on `#schedule`, `#coach`, `#logistics`
-- [ ] Add `id` on testimonials section if linked from nav (`#testimonials`)
+- [x] Add `scroll-margin-top` (≥ `4rem` / nav height) on `#schedule`, `#coach`, `#logistics`
+- [x] Add `id` on testimonials section if linked from nav (`#testimonials`)
 - [ ] Smoke-test: each nav anchor lands with heading fully visible below fixed header
 
 ### 0.4 Image attributes (existing URLs only)
 
-- [ ] Add meaningful `sizes` on hero image (`HeroSection.tsx`)
-- [ ] Add `sizes` on coach portrait and gallery tiles (`CoachSection.tsx`)
-- [ ] Add `sizes` on testimonial strip images (`TestimonialsSection.tsx`)
-- [ ] Keep `loading="eager"` on hero LCP image; lazy elsewhere
-- [ ] Improve testimonial strip `alt` text (unique per image, not repeated “Community training”)
+- [x] Add meaningful `sizes` on hero image (`HeroSection.tsx`)
+- [x] Add `sizes` on coach portrait and gallery tiles (`CoachSection.tsx`)
+- [x] Add `sizes` on testimonial strip images (`TestimonialsSection.tsx`)
+- [x] Keep `loading="eager"` on hero LCP image; lazy elsewhere
+- [x] Improve testimonial strip `alt` text (unique per image, not repeated “Community training”)
 
 ---
 

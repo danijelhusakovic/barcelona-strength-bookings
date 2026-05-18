@@ -36,8 +36,11 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <SiteNav />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <ScheduleSection />
         <CoachSection />
