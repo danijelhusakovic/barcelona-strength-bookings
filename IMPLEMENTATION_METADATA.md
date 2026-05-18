@@ -24,7 +24,7 @@ Track overall progress.
 | Phase | Topic | Done |
 |-------|--------|------|
 | [x] **A** | Audit: find and classify all tool/vendor strings | ✅ 2026-05-18 |
-| [ ] **B** | Remove/replace **user-visible** Lovable meta & copy | |
+| [x] **B** | Remove/replace **user-visible** Lovable meta & copy | ✅ 2026-05-18 |
 | [ ] **C** | Head architecture: single strategy for root + routes | |
 | [ ] **D** | Core HTML meta (title, description, lang, canonical, robots) | |
 | [ ] **E** | Open Graph (full set + image asset) | |
@@ -73,8 +73,8 @@ Audit completed 2026-05-18. Results recorded below.
 | Lovable strings in `src/` UI code | ✅ None |
 | Bolt strings anywhere in source | ✅ None |
 | Placeholder titles in source | ✅ None |
-| Remaining Lovable ref (non-HTML) | ❌ `vite.config.ts` comment line 1 — fix in Phase B.2 |
-| Generic `package.json` name | ⚠️ Optional rename in Phase B.3 |
+| Remaining Lovable ref (non-HTML) | ✅ Fixed in Phase B.2 — `vite.config.ts` comment reworded |
+| Generic `package.json` name | ✅ Renamed to `barcelona-strength-bookings` in Phase B.3 |
 
 ---
 
@@ -82,29 +82,27 @@ Audit completed 2026-05-18. Results recorded below.
 
 ### B.1 Root route meta ([`src/routes/__root.tsx`](src/routes/__root.tsx))
 
-Replace scaffold meta with either:
+`__root.tsx` was already cleaned before this phase began (confirmed in Phase A audit).
+All scaffold strings (`Lovable App`, `@Lovable`, Lovable OG tags) were absent.
+Option 1 (minimal global tags only) is already implemented: `charset`, `viewport`, `theme-color`, fallback `title`.
+Child routes own all marketing copy. No changes required here.
 
-- **Option 1 (recommended):** Minimal global tags only: `charset`, `viewport`, `theme-color` (if used), and **no** duplicate `title` / `og:title` / `description` / `twitter:site` — let the **active child route** own marketing copy; OR  
-- **Option 2:** Same final strings as homepage (duplicated) — worse for maintenance.
-
-Concrete removals/changes:
-
-- [ ] Remove or replace `{ title: "Lovable App" }` — do not leave as default document title for non-index routes without a title.
-- [ ] Remove or replace `name="description"` Lovable string.
-- [ ] Remove `name="author"` Lovable **or** set to real author / business name if desired.
-- [ ] Remove/replace `og:title`, `og:description` Lovable duplicates.
-- [ ] Remove `twitter:site` → `@Lovable` **unless** the business has a real Twitter/X handle to use; if none, **omit** `twitter:site` rather than a placeholder.
-- [ ] Re-evaluate `twitter:card`: keep `summary` or switch to `summary_large_image` once a proper `twitter:image` exists (§5–§6).
+- [x] Remove or replace `{ title: "Lovable App" }` — **N/A**: already `"Barcelona Strength Bookings"`
+- [x] Remove or replace `name="description"` Lovable string — **N/A**: no description in root (correct per Option 1)
+- [x] Remove `name="author"` Lovable — **N/A**: no author tag present
+- [x] Remove/replace `og:title`, `og:description` Lovable duplicates — **N/A**: no OG tags in root (correct)
+- [x] Remove `twitter:site` → `@Lovable` — **N/A**: no twitter tags in root
+- [x] Re-evaluate `twitter:card` — **N/A**: no twitter tags in root; card will be set per-route in Phase F
 
 ### B.2 Comments and developer-facing copy
 
-- [ ] [`vite.config.ts`](vite.config.ts): first comment block — replace “@lovable.dev” product pitch with neutral description (“preconfigured Vite + TanStack Start stack”).
-- [ ] Scan `src/**/*.tsx` for accidental “Lovable” in UI strings (none known; confirm).
+- [x] [`vite.config.ts`](vite.config.ts): rewrote first comment block — removed `@lovable.dev` product pitch; now reads "Preconfigured Vite + TanStack Start stack. The bundled config already includes…"
+- [x] Scan `src/**/*.tsx` for accidental "Lovable" in UI strings — **zero hits** confirmed in Phase A audit ✅
 
 ### B.3 Optional repo hygiene
 
-- [ ] [`package.json`](package.json) `"name"`: rename from `tanstack_start_ts` to something like `barcelona-strength-bookings` (cosmetic; npm publish name if ever published).
-- [ ] Add a short [`README.md`](README.md) describing the project (no vendor name required).
+- [x] [`package.json`](package.json) `"name"`: renamed from `tanstack_start_ts` to `barcelona-strength-bookings` ✅
+- [x] [`README.md`](README.md): created with project description ✅
 
 ---
 
