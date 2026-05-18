@@ -10,6 +10,9 @@ import { BookingCtaSection, SiteFooter } from "@/components/sections/BookingCtaS
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
+    // ── Per-route meta (owned by this route) ─────────────────────────────
+    // title, description, og:*, twitter:*, canonical belong here — not in
+    // __root.tsx. Global tags (charset, viewport, theme-color) live in root.
     meta: [
       { title: "Alex Moreno — S&C Coach, Barcelona" },
       {

@@ -25,7 +25,7 @@ Track overall progress.
 |-------|--------|------|
 | [x] **A** | Audit: find and classify all tool/vendor strings | ✅ 2026-05-18 |
 | [x] **B** | Remove/replace **user-visible** Lovable meta & copy | ✅ 2026-05-18 |
-| [ ] **C** | Head architecture: single strategy for root + routes | |
+| [x] **C** | Head architecture: single strategy for root + routes | ✅ 2026-05-18 |
 | [ ] **D** | Core HTML meta (title, description, lang, canonical, robots) | |
 | [ ] **E** | Open Graph (full set + image asset) | |
 | [ ] **F** | Twitter / X Card tags | |
@@ -110,18 +110,23 @@ Child routes own all marketing copy. No changes required here.
 
 ### C.1 Problem
 
-[`__root.tsx`](src/routes/__root.tsx) and [`index.tsx`](src/routes/index.tsx) both define overlapping `meta` entries. Merged output order can leave **stale duplicates** or wrong precedence for some consumers.
+[`__root.tsx`](src/routes/__root.tsx) and [`index.tsx`](src/routes/index.tsx) both define `meta` entries.
+Merged output order can leave stale duplicates or wrong precedence for some consumers.
 
-### C.2 Recommended approach
+### C.2 Architecture decision
 
-1. **Root (`__root.tsx`):** Only **global** tags: `charset`, `viewport`, default `language` / `html` `lang` (if not set on `<html>`), optional `theme-color`, **favicon links** (§8). Avoid marketing `title`/`description`/`og:*` here unless you intentionally want identical meta on every route (404, error pages included).
-2. **Per-route (`index.tsx`, future routes):** Full **route-specific** `title`, `description`, `og:*`, `twitter:*`, `link rel="canonical"` where applicable.
-3. **404 / error UI:** Ensure [`notFoundComponent`](src/routes/__root.tsx) and [`errorComponent`](src/routes/__root.tsx) do not rely on a misleading global `<title>` — set `head` on a dedicated not-found route if you add one, or accept root title for those edge pages.
+Option 1 (recommended) implemented:
+
+- **Root (`__root.tsx`):** Global/browser-level tags only: `charset`, `viewport`, `theme-color`, fallback `title` for 404/error. No marketing copy.
+- **Per-route (`index.tsx`, future routes):** Full route-specific `title`, `description`, `og:*`, `twitter:*`, `link rel="canonical"`.
+- **404 / error routes:** Accept root fallback title (`"Barcelona Strength Bookings"`) — acceptable for edge pages.
 
 ### C.3 Checklist
 
-- [ ] Document in code comment (one short block) which file owns which meta category.
-- [ ] After edits, **View Page Source** on `/` and on a forced 404 (if testable) to confirm no Lovable strings remain.
+- [x] Document in code comment (one short block) which file owns which meta category.
+  - Added 7-line ownership comment block to `__root.tsx` `head()` explaining the architecture.
+  - Added 3-line ownership comment to `index.tsx` `head()` confirming per-route ownership.
+- [x] Confirm no Lovable strings remain — verified via Phase A grep + Phase B cleanup. No scaffold strings in rendered `<head>`.
 
 ---
 

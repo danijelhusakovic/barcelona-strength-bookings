@@ -71,11 +71,19 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
+      // ── Global / browser-level tags (owned by root) ──────────────────────
+      // charset and viewport must be here — they apply to every route.
+      // theme-color controls the browser chrome colour on mobile.
+      // title here is a fallback for edge routes (404, error) that have no
+      // child head(); marketing title/description/og:*/twitter:* are owned by
+      // individual child routes (e.g. src/routes/index.tsx) so they can differ
+      // per page without duplicating or conflicting.
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Barcelona Strength Bookings" },
       { name: "theme-color", content: "#09090b" },
-      // Route-specific meta (marketing title, description, og:*) is defined in child routes
+      // Route-specific meta (marketing title, description, og:*, twitter:*,
+      // canonical) is defined in child routes — do NOT duplicate here.
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
