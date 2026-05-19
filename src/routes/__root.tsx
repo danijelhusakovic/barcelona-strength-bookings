@@ -10,6 +10,7 @@ import {
 import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
+import { SITE } from "@/lib/site-meta";
 
 function NotFoundComponent() {
   return (
@@ -80,12 +81,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // per page without duplicating or conflicting.
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Barcelona Strength Bookings" },
-      { name: "theme-color", content: "#09090b" },
+      { title: SITE.name },
+      { name: "theme-color", content: "#141210" },
       // Route-specific meta (marketing title, description, og:*, twitter:*,
       // canonical) is defined in child routes — do NOT duplicate here.
     ],
     links: [
+      // ── Phase G: Icons & PWA chrome ───────────────────────────────────────
+      // SVG favicon — best modern browser support; fallback to favicon-32.png.
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
+      // ── Fonts ──────────────────────────────────────────────────────────────
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",

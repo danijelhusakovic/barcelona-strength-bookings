@@ -20,4 +20,12 @@ export default defineConfig({
   },
   cloudflare: isVercel ? false : undefined,
   plugins: isVercel ? [...nitro({ preset: "vercel" })] : [],
+  vite: {
+    define: {
+      // Injected at build time on Vercel (production | preview | development).
+      "import.meta.env.VITE_VERCEL_ENV": JSON.stringify(
+        process.env.VERCEL_ENV ?? "",
+      ),
+    },
+  },
 });
