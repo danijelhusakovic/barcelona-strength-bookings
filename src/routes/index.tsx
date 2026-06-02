@@ -1,14 +1,19 @@
+// Page composition order (Alt B): Hero → How it works → Schedule → Coach → Testimonials → Logistics → CTA
 import { createFileRoute } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
 import { SiteNav } from "@/components/sections/SiteNav";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ScheduleSection } from "@/components/sections/ScheduleSection";
 import { CoachSection } from "@/components/sections/CoachSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { LogisticsSection } from "@/components/sections/LogisticsSection";
 import {
   BookingCtaSection,
   SiteFooter,
 } from "@/components/sections/BookingCtaSection";
+import { BookingProvider } from "@/components/booking/booking-context";
+import { BookingSheet } from "@/components/booking/BookingSheet";
 import { SITE } from "@/lib/site-meta";
 
 // JSON-LD structured data (Phase H) — Person + LocalBusiness
@@ -86,20 +91,33 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
-      <SiteNav />
-      <main id="main-content">
-        <HeroSection />
-        <ScheduleSection />
-        <CoachSection />
-        <TestimonialsSection />
-        <LogisticsSection />
-        <BookingCtaSection />
-      </main>
-      <SiteFooter />
-    </div>
+    <BookingProvider>
+      <div className="min-h-screen bg-background text-foreground">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+
+        {/* SiteNav uses useBooking() for the Book button + scroll-spy */}
+        <SiteNav />
+
+        <main id="main-content">
+          <HeroSection />
+          <HowItWorksSection />
+          <ScheduleSection />
+          <CoachSection />
+          <TestimonialsSection />
+          <LogisticsSection />
+          <BookingCtaSection />
+        </main>
+
+        <SiteFooter />
+
+        {/* Global booking sheet — controlled via BookingContext */}
+        <BookingSheet />
+
+        {/* Global toast notifications — ember palette, bottom-right */}
+        <Toaster position="bottom-right" richColors={false} />
+      </div>
+    </BookingProvider>
   );
 }

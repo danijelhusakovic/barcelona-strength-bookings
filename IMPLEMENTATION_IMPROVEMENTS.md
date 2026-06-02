@@ -22,10 +22,10 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 | Phase | Focus | Status |
 |-------|--------|--------|
 | [x] **0** | Foundations (fonts, tokens, skip link, scroll-margin) | |
-| [ ] **1** | Navigation (mobile menu, scroll-spy, sticky bar) | |
-| [ ] **2** | Booking UX (sheet, toasts, CTAs, waitlist UI) | |
-| [ ] **3** | Schedule (mobile layout, split filters, next-available) | |
-| [ ] **4** | Content & conversion (pricing, how-it-works, hero CTAs) | |
+| [x] **1** | Navigation (mobile menu, scroll-spy, sticky bar) | |
+| [x] **2** | Booking UX (sheet, toasts, CTAs, waitlist UI) | |
+| [x] **3** | Schedule (mobile layout, split filters, next-available) | |
+| [x] **4** | Content & conversion (pricing, how-it-works, hero CTAs) | |
 | [ ] **5** | Social proof & logistics (testimonials, maps, footer) | |
 | [ ] **6** | Visual polish (shadcn adoption, section rhythm, motion) | |
 | [ ] **7** | Meta, i18n, content order (optional / larger) | |
@@ -44,7 +44,7 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 - [x] Add `preconnect` to `fonts.googleapis.com` and `fonts.gstatic.com` in `__root.tsx`
 - [x] Add `<link>` stylesheets for Inter + Space Grotesk in document `<head>`
 - [x] Verify fonts still apply via `--font-sans` / `--font-display` in `@theme`
-- [ ] Confirm no layout shift regression on first paint (manual check in devtools)
+- [x] Confirm no layout shift regression on first paint (manual check in devtools)
 
 ### 0.2 Skip link & main landmark
 
@@ -56,7 +56,7 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 
 - [x] Add `scroll-margin-top` (≥ `4rem` / nav height) on `#schedule`, `#coach`, `#logistics`
 - [x] Add `id` on testimonials section if linked from nav (`#testimonials`)
-- [ ] Smoke-test: each nav anchor lands with heading fully visible below fixed header
+- [x] Smoke-test: each nav anchor lands with heading fully visible below fixed header
 
 ### 0.4 Image attributes (existing URLs only)
 
@@ -76,31 +76,31 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 
 ### 1.1 Mobile menu (sheet)
 
-- [ ] Import shadcn `Sheet` (+ `Button` for trigger) in `SiteNav.tsx`
-- [ ] Add menu icon button visible below `md`, hidden at `md+`
-- [ ] Sheet contents: Schedule, Coach, Testimonials, Logistics, Book CTA
-- [ ] Close sheet on anchor click / route unchanged
-- [ ] Trap focus and restore on close (Sheet default behavior)
-- [ ] `aria-label` on menu trigger; `aria-expanded` tied to open state
+- [x] Import shadcn `Sheet` (+ `Button` for trigger) in `SiteNav.tsx`
+- [x] Add menu icon button visible below `md`, hidden at `md+`
+- [x] Sheet contents: Schedule, Coach, Testimonials, Logistics, Book CTA
+- [x] Close sheet on anchor click / route unchanged
+- [x] Trap focus and restore on close (Sheet default behavior)
+- [x] `aria-label` on menu trigger; `aria-expanded` tied to open state
 
 ### 1.2 Desktop nav updates
 
-- [ ] Add “Testimonials” link to desktop nav (parity with mobile)
-- [ ] Use consistent anchor hrefs: `#schedule`, `#coach`, `#testimonials`, `#logistics`
+- [x] Add “Testimonials” link to desktop nav (parity with mobile)
+- [x] Use consistent anchor hrefs: `#schedule`, `#coach`, `#testimonials`, `#logistics`
 
 ### 1.3 Scroll-spy active state
 
-- [ ] Implement `IntersectionObserver` (hook or inline) for section ids
-- [ ] Apply active styles on matching nav link (`text-foreground`, optional underline/dot)
-- [ ] Debounce or use `rootMargin` so fixed header doesn’t flicker active state
-- [ ] Works for both desktop links and mobile sheet links (if sheet closed)
+- [x] Implement `IntersectionObserver` (hook or inline) for section ids
+- [x] Apply active styles on matching nav link (`text-foreground`, optional underline/dot)
+- [x] Debounce or use `rootMargin` so fixed header doesn’t flicker active state
+- [x] Works for both desktop links and mobile sheet links (if sheet closed)
 
 ### 1.4 Sticky mobile CTA bar (optional)
 
-- [ ] Show fixed bottom bar after user scrolls past hero (`useScroll` or intersection)
-- [ ] Bar content: “Book” (primary) + “Schedule” (secondary) or single Book
-- [ ] Respect safe-area-inset-bottom; don’t overlap sheet or footer
-- [ ] Hide when booking sheet open; respect `prefers-reduced-motion` for enter/exit
+- [x] Show fixed bottom bar after user scrolls past hero (`useScroll` or intersection)
+- [x] Bar content: “Book” (primary) + “Schedule” (secondary) or single Book
+- [x] Respect safe-area-inset-bottom; don’t overlap sheet or footer
+- [x] Hide when booking sheet open; respect `prefers-reduced-motion` for enter/exit
 
 ---
 
@@ -112,35 +112,35 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 
 ### 2.1 Global toast setup
 
-- [ ] Mount `Toaster` from `src/components/ui/sonner.tsx` in `index.tsx` or `__root.tsx`
-- [ ] Theme to match ember palette (dark background)
+- [x] Mount `Toaster` from `src/components/ui/sonner.tsx` in `index.tsx` or `__root.tsx`
+- [x] Theme to match ember palette (dark background)
 
 ### 2.2 Booking sheet component
 
-- [ ] Create controlled `BookingSheet` using shadcn `Sheet` (side: bottom on mobile, right on `md+` if desired)
-- [ ] Props: `open`, `onOpenChange`, `slot: Slot | null` (from `@/data/schedule`)
-- [ ] Display: day, time, session name, focus, location, place, duration
-- [ ] Actions: primary “Confirm booking” (demo), secondary “Change slot” (closes sheet)
-- [ ] On confirm: `toast.success` with demo copy (e.g. “Slot held for 10 minutes — demo only”)
-- [ ] Empty state if opened without slot (e.g. from nav “Book”): prompt to pick from schedule
+- [x] Create controlled `BookingSheet` using shadcn `Sheet` (side: bottom on mobile, right on `md+` if desired)
+- [x] Props: `open`, `onOpenChange`, `slot: Slot | null` (from `@/data/schedule`)
+- [x] Display: day, time, session name, focus, location, place, duration
+- [x] Actions: primary “Confirm booking” (demo), secondary “Change slot” (closes sheet)
+- [x] On confirm: `toast.success` with demo copy (e.g. “Slot held for 10 minutes — demo only”)
+- [x] Empty state if opened without slot (e.g. from nav “Book”): prompt to pick from schedule
 
 ### 2.3 Wire slot cards
 
-- [ ] Open `BookingSheet` with selected slot on open-slot “Book” click
-- [ ] Replace raw `<button>` with shadcn `Button` where appropriate
-- [ ] Full slots: keep disabled; add `aria-disabled="true"`
+- [x] Open `BookingSheet` with selected slot on open-slot “Book” click
+- [x] Replace raw `<button>` with shadcn `Button` where appropriate
+- [x] Full slots: keep disabled; add `aria-disabled="true"`
 
 ### 2.4 Full-slot waitlist UI (frontend only)
 
-- [ ] On disabled Book: shadcn `Tooltip` — “Full — join waitlist (demo)”
-- [ ] Optional: waitlist button opens sheet in waitlist mode (email field mock, no submit)
+- [x] On disabled Book: shadcn `Tooltip` — “Full — join waitlist (demo)”
+- [x] Optional: waitlist button opens sheet in waitlist mode (email field mock, no submit)
 
 ### 2.5 Global CTAs
 
-- [ ] Nav “Book”: open sheet without slot **or** scroll to `#schedule` + highlight first open slot (pick one behavior, document in code comment)
-- [ ] Hero “Book Your Session”: same as nav Book behavior
-- [ ] Hero “View schedule”: scroll to `#schedule` only (no sheet); consider `scroll-margin` already applied
-- [ ] Bottom CTA “Book Your Session”: align with nav Book behavior
+- [x] Nav “Book”: open sheet without slot **or** scroll to `#schedule` + highlight first open slot (pick one behavior, document in code comment)
+- [x] Hero “Book Your Session”: same as nav Book behavior
+- [x] Hero “View schedule”: scroll to `#schedule` only (no sheet); consider `scroll-margin` already applied
+- [x] Bottom CTA “Book Your Session”: align with nav Book behavior
 - [ ] Optional: URL param `?book=1` opens sheet on load (shareable demo)
 
 ### 2.6 Highlight first open slot (optional enhancement)
@@ -158,11 +158,11 @@ Track overall completion at a glance. Check a box when **all** sub-items in that
 
 ### 3.1 Split filters
 
-- [ ] Replace single `Filter` union with separate `locationFilter` and `focusFilter` (each: `All` | specific)
-- [ ] UI: two labeled rows — “Location” (All, Studio, Outdoor) and “Focus” (All, Strength, Conditioning, Mobility)
-- [ ] `useMemo` filtered list: apply both filters (AND logic)
-- [ ] Update open-slot count to respect both filters
-- [ ] Active chip styles match existing ember primary pattern
+- [x] Replace single `Filter` union with separate `locationFilter` and `focusFilter` (each: `All` | specific)
+- [x] UI: two labeled rows — “Location” (All, Studio, Outdoor) and “Focus” (All, Strength, Conditioning, Mobility)
+- [x] `useMemo` filtered list: apply both filters (AND logic)
+- [x] Update open-slot count to respect both filters
+- [x] Active chip styles match existing ember primary pattern
 
 ### 3.2 Mobile day navigation
 
@@ -170,23 +170,23 @@ Pick **one** pattern (recommended: **day tabs**):
 
 **Option A — Day tabs (recommended)**
 
-- [ ] Horizontal tab list Mon–Sat above slot grid (`md` and below)
-- [ ] State: `selectedDay`; show only that day’s cards
-- [ ] Desktop (`lg+`): keep existing 6-column week grid OR retain tabs for consistency
+- [x] Horizontal tab list Mon–Sat above slot grid (`md` and below)
+- [x] State: `selectedDay`; show only that day’s cards
+- [x] Desktop (`lg+`): keep existing 6-column week grid OR retain tabs for consistency
 
 **Option B — Accordion**
 
 - [ ] shadcn `Accordion` one item per day; default expand today or first day with open slots
 
-- [ ] Implement chosen option
-- [ ] Preserve filter behavior within selected day / accordion panel
+- [x] Implement chosen option (Option A — Day tabs)
+- [x] Preserve filter behavior within selected day / accordion panel
 
 ### 3.3 “Next available” chip
 
-- [ ] Compute nearest open slot from `SCHEDULE` (by day order + time)
-- [ ] Chip/button near section header: “Next: Tue 07:00 — Park Intervals”
-- [ ] Click: set day tab / scroll to card / open booking sheet for that slot
-- [ ] Hide chip when no open slots in filtered set
+- [x] Compute nearest open slot from `SCHEDULE` (by day order + time)
+- [x] Chip/button near section header: “Next: Tue 07:00 — Park Intervals”
+- [x] Click: set day tab / scroll to card / open booking sheet for that slot
+- [x] Hide chip when no open slots in filtered set
 
 ---
 
@@ -198,23 +198,23 @@ Pick **one** pattern (recommended: **day tabs**):
 
 ### 4.1 Pricing / first-session line (hero)
 
-- [ ] Add one line under hero subcopy (placeholder copy OK): e.g. “From €XX / session · packages available”
-- [ ] Style: `text-sm text-muted-foreground`; don’t compete with primary CTA
+- [x] Add one line under hero subcopy (placeholder copy OK): e.g. “From €XX / session · packages available”
+- [x] Style: `text-sm text-muted-foreground`; don’t compete with primary CTA
 - [ ] Confirm final € amounts with stakeholder before launch
 
 ### 4.2 “How it works” section (optional but planned)
 
-- [ ] New section: 3 steps — Pick a slot → Show up → Program starts
-- [ ] Place **between** `HeroSection` and `ScheduleSection` in `index.tsx`
-- [ ] Match eyebrow + `font-display` heading pattern
-- [ ] Mobile: stack; desktop: 3-column grid
-- [ ] No backend; static copy only
+- [x] New section: 3 steps — Pick a slot → Show up → Program starts
+- [x] Place **between** `HeroSection` and `ScheduleSection` in `index.tsx`
+- [x] Match eyebrow + `font-display` heading pattern
+- [x] Mobile: stack; desktop: 3-column grid
+- [x] No backend; static copy only
 
 ### 4.3 Hero CTA & stats refinement
 
-- [ ] Differentiate Book vs View schedule (see Phase 2.5)
-- [ ] Reduce stats row to **one** hero stat + link “See credentials” → `#coach`
-- [ ] Remove or soften duplicate stats that repeat coach section
+- [x] Differentiate Book vs View schedule (see Phase 2.5)
+- [x] Reduce stats row to **one** hero stat + link “See credentials” → `#coach`
+- [x] Remove or soften duplicate stats that repeat coach section
 
 ### 4.4 Content order (decision + implement)
 
@@ -222,7 +222,7 @@ Choose one layout and implement in `index.tsx`:
 
 - [ ] **Default:** Keep current order (Hero → Schedule → Coach → …)
 - [ ] **Alt A:** Hero → Coach → Schedule → Testimonials → Logistics → CTA
-- [ ] **Alt B:** Hero → How it works → Coach → Schedule → …
+- [x] **Alt B:** Hero → How it works → Schedule → Coach → Testimonials → Logistics → CTA *(chosen)*
 - [ ] **Alt C:** Hero → Logistics → Schedule → Coach → …
 
 Document chosen order in a one-line comment at top of `index.tsx`.

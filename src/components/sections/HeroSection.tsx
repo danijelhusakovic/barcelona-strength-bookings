@@ -1,6 +1,10 @@
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useBooking } from "@/components/booking/booking-context";
 
 export function HeroSection() {
+  const { openSheet } = useBooking();
+
   return (
     <section className="relative pt-24 lg:pt-16 min-h-[100svh] flex items-center overflow-hidden">
       <div className="mx-auto max-w-7xl w-full px-6 grid lg:grid-cols-12 gap-12 items-center">
@@ -15,16 +19,25 @@ export function HeroSection() {
             <span className="text-muted-foreground">Without guesswork.</span>
           </h1>
           <p className="mt-8 text-lg text-muted-foreground max-w-md leading-relaxed">
-            Structured strength and conditioning for busy professionals — indoor studio sessions and outdoor training across the city.
+            Structured strength and conditioning for busy professionals — indoor
+            studio sessions and outdoor training across the city.
           </p>
+          {/* 4.1 — Pricing hint; confirm exact € amount with stakeholder before launch */}
+          <p className="mt-3 text-sm text-muted-foreground/70">
+            From €XX / session &middot; packages available
+          </p>
+
+          {/* CTAs — Book opens sheet; View schedule scrolls only */}
           <div className="mt-10 flex items-center gap-6">
-            <a
-              href="#schedule"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
+            <Button
+              id="hero-book-btn"
+              size="lg"
+              className="gap-2"
+              onClick={() => openSheet()}
             >
               Book Your Session
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </Button>
             <a
               href="#schedule"
               className="text-sm text-foreground border-b border-hairline hover:border-primary transition-colors pb-1"
@@ -33,19 +46,20 @@ export function HeroSection() {
             </a>
           </div>
 
-          <dl className="mt-16 grid grid-cols-3 gap-6 max-w-md">
+          {/* 4.3 — Reduced to one hero stat; full credentials live in #coach */}
+          <dl className="mt-16 flex items-center gap-8">
             <div>
-              <dt className="text-xs uppercase tracking-wider text-muted-foreground">Coaching</dt>
+              <dt className="text-xs uppercase tracking-wider text-muted-foreground">
+                Coaching experience
+              </dt>
               <dd className="mt-2 font-display text-2xl">12 yrs</dd>
             </div>
-            <div>
-              <dt className="text-xs uppercase tracking-wider text-muted-foreground">Clients</dt>
-              <dd className="mt-2 font-display text-2xl">140+</dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-wider text-muted-foreground">Retention</dt>
-              <dd className="mt-2 font-display text-2xl">9 mo</dd>
-            </div>
+            <a
+              href="#coach"
+              className="text-sm text-muted-foreground border-b border-hairline hover:border-primary hover:text-foreground transition-colors pb-1 self-end mb-1"
+            >
+              See credentials
+            </a>
           </dl>
         </div>
 

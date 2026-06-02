@@ -1,6 +1,10 @@
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useBooking } from "@/components/booking/booking-context";
 
 export function BookingCtaSection() {
+  const { openSheet } = useBooking();
+
   return (
     <section aria-labelledby="cta-heading" className="border-t border-hairline/40">
       <div className="mx-auto max-w-7xl px-6 py-28 sm:py-40 text-center">
@@ -16,13 +20,15 @@ export function BookingCtaSection() {
           One slot is enough to begin. Pick a time that fits.
         </p>
         <div className="mt-12">
-          <a
-            href="#schedule"
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-8 py-4 text-base font-medium text-primary-foreground hover:opacity-90 transition-opacity"
+          <Button
+            id="cta-book-btn"
+            size="lg"
+            className="gap-2 px-8 py-4 text-base"
+            onClick={() => openSheet()}
           >
             Book Your Session
             <ArrowRight className="h-4 w-4" />
-          </a>
+          </Button>
         </div>
       </div>
     </section>
@@ -38,8 +44,9 @@ export function SiteFooter() {
         </div>
         <div>Barcelona, Spain</div>
         <div className="flex items-center gap-6">
-          <a href="#" className="hover:text-foreground transition-colors">Instagram</a>
-          <a href="#" className="hover:text-foreground transition-colors">WhatsApp</a>
+          {/* Real URLs to be added when available — placeholder links removed */}
+          <span>Instagram</span>
+          <span>WhatsApp</span>
           <span>© {new Date().getFullYear()}</span>
         </div>
       </div>
